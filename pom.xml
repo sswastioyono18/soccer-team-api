@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.test</groupId>
+	<artifactId>soccer-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>soccer-api</name>
+	<description>Soccer API</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<jacoco.reportPath>${project.build.directory}/jacoco.exec</jacoco.reportPath>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<junit.version>4.12</junit.version>
+		<testcontainer.version>1.14.3</testcontainer.version>
+		<testcontainer.mysql.version>1.14.3</testcontainer.mysql.version>
+		<maven.surefire.plugin.version>3.0.0-M4</maven.surefire.plugin.version>
+		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
+		<surefire-junit4.plugin.version>3.0.0-M4</surefire-junit4.plugin.version>
+		<jacoco.maven.plugin.version>0.8.2</jacoco.maven.plugin.version>
+		<mockito.plugin.version>1.9.5</mockito.plugin.version>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.plugin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers</artifactId>
+			<version>${testcontainer.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mysql</artifactId>
+			<version>${testcontainer.mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.2.32</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>2.3.1.RELEASE</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.maven.plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*Dto*.*</exclude>
+						<exclude>**/*Entity*.*</exclude>
+						<exclude>**/*Repository*.*</exclude>
+						<exclude>**/*Application*.*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+			<!--            <plugin>-->
+			<!--                <groupId>org.apache.maven.plugins</groupId>-->
+			<!--                <artifactId>maven-resources-plugin</artifactId>-->
+			<!--                <version>3.1.0</version>-->
+			<!--                <executions>-->
+			<!--                    <execution>-->
+			<!--                        <id>copy-local-properties (After copying common, overwrite it with local)</id>-->
+			<!--                        &lt;!&ndash; here the phase you need &ndash;&gt;-->
+			<!--                        <phase>compile</phase>-->
+			<!--                        <goals>-->
+			<!--                            <goal>copy-resources</goal>-->
+			<!--                        </goals>-->
+			<!--                        <configuration>-->
+			<!--                            <overwrite>true</overwrite>-->
+			<!--                            <outputDirectory>src/main/resources</outputDirectory>-->
+			<!--                            <resources>-->
+			<!--                                <resource>-->
+			<!--                                    <directory>./config/dev</directory>-->
+			<!--                                </resource>-->
+			<!--                            </resources>-->
+			<!--                        </configuration>-->
+			<!--                    </execution>-->
+			<!--                </executions>-->
+			<!--            </plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>${surefire-junit4.plugin.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<skipTests>true</skipTests>
+					<testFailureIgnore>true</testFailureIgnore>
+					<forkMode>once</forkMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>unit-tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skipTests>false</skipTests>
+							<includes>
+								<include>**/*Test.java</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skipTests>false</skipTests>
+							<includes>
+								<include>**/*IT.*</include>
+								<include>**/*Tests.*</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>${coveralls.plugin.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
