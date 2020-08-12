@@ -10,8 +10,9 @@ import javax.persistence.*;
 public class Player {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "player_id", nullable = false)
-    private Integer playerId;
+    private Long playerId;
 
     @Column(name = "player_no", nullable = false)
     private String playerNo;

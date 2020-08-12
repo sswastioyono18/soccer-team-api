@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  soccer-api-mysql:
+    image: mysql:8.0.21
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=soccer_api
+      - MYSQL_USER=root
+    volumes:
+      - ./db/mysql-data:/var/lib/mysql
+      - ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306

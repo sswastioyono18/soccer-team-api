@@ -1,10 +1,11 @@
 package com.test.soccerapi.service;
 
 
-import com.test.soccerapi.entity.Player;
+import com.test.soccerapi.entity.Team;
 
 import java.util.List;
 
 public interface TeamService {
-    List<Player> findByTeamId(String teamId);
+    List<Team> findByTeamId(Long teamId);
+    List<Team> findAll();
 }

@@ -1,6 +1,6 @@
 package com.test.soccerapi.controller;
 
-import com.test.soccerapi.entity.Player;
+import com.test.soccerapi.entity.Team;
 import com.test.soccerapi.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,13 @@ public class SoccerController {
 
     @GetMapping("/players/{teamId}")
     @ResponseBody
-    public ResponseEntity<List<Player>> getActivity(@PathVariable String teamId) {
+    public ResponseEntity<List<Team>> getActivity(@PathVariable Long teamId) {
         return new ResponseEntity<>(teamService.findByTeamId(teamId), HttpStatus.OK);
+    }
+
+    @GetMapping("/players")
+    @ResponseBody
+    public ResponseEntity<List<Team>> getActivity() {
+        return new ResponseEntity<>(teamService.findAll(), HttpStatus.OK);
     }
 }

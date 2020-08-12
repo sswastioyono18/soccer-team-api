@@ -1,10 +1,11 @@
 package com.test.soccerapi.logic;
 
 
-import com.test.soccerapi.entity.Player;
+import com.test.soccerapi.entity.Team;
 
 import java.util.List;
 
 public interface TeamLogic {
-    List<Player> findByTeamId(String teamId);
+    List<Team> findByTeamId(Long teamId);
+    List<Team> findAll();
 }

@@ -13,7 +13,7 @@ public class Team {
 
     @Id
     @Column(name = "team_id", nullable = false)
-    private Integer teamId;
+    private Long teamId;
     @Column(name = "team_name", nullable = false)
     private String teamName;
 
