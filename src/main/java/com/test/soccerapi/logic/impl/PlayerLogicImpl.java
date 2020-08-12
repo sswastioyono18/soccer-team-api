@@ -3,9 +3,7 @@ package com.test.soccerapi.logic.impl;
 import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.entity.Team;
 import com.test.soccerapi.logic.PlayerLogic;
-import com.test.soccerapi.logic.TeamLogic;
 import com.test.soccerapi.repository.PlayerRepository;
-import com.test.soccerapi.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,17 +21,20 @@ public class PlayerLogicImpl implements PlayerLogic {
 
 
     @Override
-    public List<Team> findAll() {
-        return null;
+    public List<Player> findAll() {
+        return playerRepository.findAll();
     }
 
     @Override
     public Player addPlayer(Player player) {
-        return null;
+        return playerRepository.save(player);
     }
 
     @Override
-    public void addPlayers(List<Player> playerList) {
-
+    public void addPlayers(List<Player> playerList, Team team) {
+        for(Player player: playerList){
+            player.setTeam(team);
+            playerRepository.save(player);
+        }
     }
 }

@@ -29,30 +29,42 @@ public class SoccerController {
     @GetMapping("/{teamName}/players")
     @Description("Retrieve all players on a team")
     @ResponseBody
-    public ResponseEntity<List<Team>> getTeamPlayers(@PathVariable String teamName) {
+    public ResponseEntity<List<Team>> getPlayers(@PathVariable String teamName) {
         return new ResponseEntity<>(teamService.findByTeamName(teamName), HttpStatus.OK);
     }
 
     @GetMapping("/players")
     @Description("Retrieve all players")
     @ResponseBody
-    public ResponseEntity<List<Player>> getAllTeamPlayers() {
-        return new ResponseEntity<List<Player>>(playerService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Player>> getAllPlayers() {
+        return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/player")
+    @Description("Add a player")
+    @ResponseBody
+    public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
+        playerService.addPlayer(player);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/team")
+    @Description("Create a team with (or without player(s))")
     @ResponseBody
     public ResponseEntity<Team> createTeam(@RequestBody SoccerTeamDataDto soccerTeamDataDto) {
-        Team teamResult = teamService.createTeam(soccerTeamDataDto.getTeam());
-        Player player = new Player();
-        player.setTeam(teamResult);
+        Team team = teamService.createTeam(soccerTeamDataDto.getTeam());
+        playerService.addPlayers(soccerTeamDataDto.getPlayers(), team);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/teams")
+    @Description("Create multiple team with (or without player(s))")
     @ResponseBody
-    public ResponseEntity<List<SoccerTeamDataDto>> createTeam(@RequestBody List<SoccerTeamDataDto> soccerTeamDataList) {
-//        teamService.createTeams(soccerTeamDataList);
+    public ResponseEntity<List<SoccerTeamDataDto>> createTeams(@RequestBody List<SoccerTeamDataDto> soccerTeamDataList) {
+        for(SoccerTeamDataDto soccerTeamDataDto: soccerTeamDataList){
+            Team team = teamService.createTeam(soccerTeamDataDto.getTeam());
+            playerService.addPlayers(soccerTeamDataDto.getPlayers(), team);
+        }
         return new ResponseEntity<>(soccerTeamDataList, HttpStatus.CREATED);
     }
 }
