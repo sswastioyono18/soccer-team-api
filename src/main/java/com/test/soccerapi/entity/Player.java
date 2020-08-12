@@ -1,5 +1,7 @@
 package com.test.soccerapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
@@ -24,5 +26,6 @@ public class Player {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
+    @JsonIgnore
     private Team team;
 }

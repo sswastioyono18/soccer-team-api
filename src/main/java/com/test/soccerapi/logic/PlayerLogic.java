@@ -7,6 +7,8 @@ import com.test.soccerapi.entity.Team;
 import java.util.List;
 
 public interface PlayerLogic {
+
+    List<Player> findByTeamName(String teamName);
     List<Player> findAll();
     Player addPlayer(Player player);
     void addPlayers(List<Player> playerList, Team team);

@@ -18,10 +18,6 @@ public class TeamServiceImpl implements TeamService {
         this.teamLogic = teamLogic;
     }
 
-    @Override
-    public List<Team> findByTeamName(String teamName) {
-        return teamLogic.findByTeamName(teamName);
-    }
 
     @Override
     public List<Team> findAll() {

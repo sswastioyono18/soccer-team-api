@@ -19,6 +19,9 @@ public class PlayerLogicImpl implements PlayerLogic {
         this.playerRepository = playerRepository;
     }
 
+    public List<Player> findByTeamName(String teamName) {
+        return playerRepository.findByTeam(teamName);
+    }
 
     @Override
     public List<Player> findAll() {

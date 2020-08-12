@@ -14,5 +14,6 @@ import java.util.Map;
 @ToString
 public class SoccerTeamDataDto {
     private Team team;
+
     private List<Player> players;
 }

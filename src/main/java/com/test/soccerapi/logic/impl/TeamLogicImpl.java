@@ -1,5 +1,6 @@
 package com.test.soccerapi.logic.impl;
 
+import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.entity.Team;
 import com.test.soccerapi.logic.TeamLogic;
 import com.test.soccerapi.repository.TeamRepository;
@@ -18,9 +19,6 @@ public class TeamLogicImpl implements TeamLogic {
         this.teamRepository = teamRepository;
     }
 
-    public List<Team> findByTeamName(String teamName) {
-       return teamRepository.findByTeamName(teamName);
-    }
 
     public List<Team> findAll() {
         return teamRepository.findAll();

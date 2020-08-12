@@ -1,11 +1,12 @@
 package com.test.soccerapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +20,7 @@ public class Team {
     @Column(name = "team_name", nullable = false)
     private String teamName;
 
-    @OneToMany(mappedBy = "team")
-    private Set<Player> players = new HashSet<>();
+    @OneToMany(mappedBy = "team", cascade=CascadeType.ALL)
+    @JsonIgnore
+    private List<Player> players;
 }
