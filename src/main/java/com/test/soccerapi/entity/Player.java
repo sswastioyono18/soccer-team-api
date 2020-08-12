@@ -1,11 +1,13 @@
 package com.test.soccerapi.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@ToString
 @Table(name = "player")
 public class Player {
 
@@ -20,7 +22,7 @@ public class Player {
     @Column(name = "player_name", nullable = false)
     private String playerName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 }

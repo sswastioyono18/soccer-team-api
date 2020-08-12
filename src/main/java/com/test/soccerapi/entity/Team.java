@@ -1,6 +1,7 @@
 package com.test.soccerapi.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@ToString
 @Table(name = "team")
 public class Team {
 

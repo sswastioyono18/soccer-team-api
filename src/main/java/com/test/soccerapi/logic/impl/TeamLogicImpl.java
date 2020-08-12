@@ -18,12 +18,22 @@ public class TeamLogicImpl implements TeamLogic {
         this.teamRepository = teamRepository;
     }
 
-    public List<Team> findByTeamId(Long teamId) {
-       return teamRepository.findByTeamId(teamId);
+    public List<Team> findByTeamName(String teamName) {
+       return teamRepository.findByTeamName(teamName);
     }
 
     public List<Team> findAll() {
         return teamRepository.findAll();
+    }
+
+    @Override
+    public Team createTeam(Team team) {
+        return teamRepository.save(team);
+    }
+
+    @Override
+    public void createTeams(List<Team> soccerTeamDataList) {
+
     }
 
 }

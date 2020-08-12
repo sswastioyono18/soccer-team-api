@@ -19,12 +19,22 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<Team> findByTeamId(Long teamId) {
-        return teamLogic.findByTeamId(teamId);
+    public List<Team> findByTeamName(String teamName) {
+        return teamLogic.findByTeamName(teamName);
     }
 
     @Override
     public List<Team> findAll() {
         return teamLogic.findAll();
+    }
+
+    @Override
+    public Team createTeam(Team team) {
+        return teamLogic.createTeam(team);
+    }
+
+    @Override
+    public void createTeams(List<Team> teamList) {
+        teamLogic.createTeams(teamList);
     }
 }
