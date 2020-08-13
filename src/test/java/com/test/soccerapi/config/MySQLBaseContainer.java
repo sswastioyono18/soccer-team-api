@@ -1,4 +1,4 @@
-package sactio.reminderapi.config;
+package com.test.soccerapi.config;
 
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
