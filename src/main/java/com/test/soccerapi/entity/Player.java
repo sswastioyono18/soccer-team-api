@@ -1,7 +1,6 @@
 package com.test.soccerapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,7 +15,7 @@ public class Player {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "player_id", nullable = false)
-    private Long playerId;
+    private Long id;
 
     @Column(name = "player_no", nullable = false)
     private String playerNo;

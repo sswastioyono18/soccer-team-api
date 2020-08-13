@@ -30,11 +30,6 @@ public class PlayerServiceImpl implements PlayerService {
         return playerLogic.findAll();
     }
 
-    @Override
-    public Player addPlayer(Player player) {
-        return playerLogic.addPlayer(player);
-    }
-
 
     @Override
     public void addPlayers(List<Player> playerList, Team team) {

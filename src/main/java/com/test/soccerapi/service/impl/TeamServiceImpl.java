@@ -20,17 +20,19 @@ public class TeamServiceImpl implements TeamService {
 
 
     @Override
-    public List<Team> findAll() {
+    public List<Team> findAllTeamsAndPlayers() {
         return teamLogic.findAll();
     }
 
     @Override
-    public Team createTeam(Team team) {
-        return teamLogic.createTeam(team);
+    public Team addTeam(Team team) {
+        return teamLogic.addTeam(team);
     }
 
     @Override
-    public void createTeams(List<Team> teamList) {
-        teamLogic.createTeams(teamList);
+    public void addTeams(List<Team> teamList) {
+        for(Team team: teamList){
+            teamLogic.addTeam(team);
+        }
     }
 }

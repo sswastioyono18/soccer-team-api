@@ -24,13 +24,11 @@ public class TeamLogicImpl implements TeamLogic {
     }
 
     @Override
-    public Team createTeam(Team team) {
+    public Team addTeam(Team team) {
+        team.getPlayers().stream().forEach(player -> {
+            player.setTeam(team);
+        } );
         return teamRepository.save(team);
-    }
-
-    @Override
-    public void createTeams(List<Team> soccerTeamDataList) {
-
     }
 
 }

@@ -1,7 +1,5 @@
 package com.test.soccerapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,11 +14,10 @@ public class Team {
 
     @Id
     @Column(name = "team_id", nullable = false)
-    private Long teamId;
+    private Long id;
     @Column(name = "team_name", nullable = false)
     private String teamName;
 
-    @OneToMany(mappedBy = "team", cascade=CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "team", fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity = Player.class)
     private List<Player> players;
 }
