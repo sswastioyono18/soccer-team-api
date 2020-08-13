@@ -1,6 +1,7 @@
 package com.test.soccerapi.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;

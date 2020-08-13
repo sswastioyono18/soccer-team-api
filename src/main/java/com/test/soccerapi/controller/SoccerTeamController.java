@@ -2,6 +2,7 @@ package com.test.soccerapi.controller;
 
 import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.entity.Team;
+import com.test.soccerapi.exception.RecordNotFoundException;
 import com.test.soccerapi.service.PlayerService;
 import com.test.soccerapi.service.TeamService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +34,11 @@ public class SoccerTeamController {
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retrieve all players based on team name") })
     @ResponseBody
     public ResponseEntity<List<Player>> findByTeamName(@PathVariable String teamName) {
-        return new ResponseEntity<>(playerService.findByTeamName(teamName), HttpStatus.OK);
+        List<Player> playerList = playerService.findByTeamName(teamName);
+        if(playerList.isEmpty()) {
+            throw new RecordNotFoundException("There is no player in team " +teamName+ " or invalid team name");
+        }
+        return new ResponseEntity<>(playerList, HttpStatus.OK);
     }
 
     @GetMapping("/players")
@@ -53,14 +59,14 @@ public class SoccerTeamController {
     @PostMapping("/team")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Create a team with (or without) player(s)") })
     @ResponseBody
-    public ResponseEntity<Team> addTeam(@RequestBody Team team) {
+    public ResponseEntity<Team> addTeam(@Valid @RequestBody Team team){
         return new ResponseEntity<>(teamService.addTeam(team), HttpStatus.CREATED);
     }
 
     @PostMapping("/teams")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Create multiple team with (or without) player(s)") })
     @ResponseBody
-    public ResponseEntity<List<Team>> addTeams(@RequestBody List<Team> teamList) {
+    public ResponseEntity<List<Team>> addTeams(@Valid @RequestBody List<Team> teamList) {
         teamService.addTeams(teamList);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

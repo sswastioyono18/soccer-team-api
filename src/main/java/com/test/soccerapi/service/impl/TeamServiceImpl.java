@@ -24,8 +24,9 @@ public class TeamServiceImpl implements TeamService {
         return teamLogic.findAll();
     }
 
+
     @Override
-    public Team addTeam(Team team) {
+    public Team addTeam(Team team)  {
         return teamLogic.addTeam(team);
     }
 

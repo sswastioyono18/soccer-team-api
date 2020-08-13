@@ -1,7 +1,6 @@
 package com.test.soccerapi.service.impl;
 
 import com.test.soccerapi.entity.Player;
-import com.test.soccerapi.entity.Team;
 import com.test.soccerapi.logic.PlayerLogic;
 import com.test.soccerapi.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ public class PlayerServiceImpl implements PlayerService {
         this.playerLogic = playerLogic;
     }
 
-
     @Override
     public List<Player> findByTeamName(String teamName) {
         return playerLogic.findByTeamName(teamName);
@@ -28,11 +26,5 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public List<Player> findAll() {
         return playerLogic.findAll();
-    }
-
-
-    @Override
-    public void addPlayers(List<Player> playerList, Team team) {
-         playerLogic.addPlayers(playerList, team);
     }
 }
