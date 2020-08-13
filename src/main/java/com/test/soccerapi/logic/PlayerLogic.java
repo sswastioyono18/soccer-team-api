@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PlayerLogic {
 
-    List<Player> findByTeamId(Long teamId);
+    List<Player> findByTeamName(String teamId);
     List<Player> findAll();
     Player addPlayer(Player player);
     void addPlayers(List<Player> playerList, Team team);

@@ -19,8 +19,8 @@ public class PlayerLogicImpl implements PlayerLogic {
         this.playerRepository = playerRepository;
     }
 
-    public List<Player> findByTeamId(Long teamId) {
-        return playerRepository.findByTeam_TeamId(teamId);
+    public List<Player> findByTeamName(String teamName) {
+        return playerRepository.findByTeam_TeamName(teamName);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlayerService {
 
-    List<Player> findByTeamId(Long teamId);
+    List<Player> findByTeamName(String teamName);
 
     List<Player> findAll();
     void addPlayers(List<Player> playerList, Team team);
