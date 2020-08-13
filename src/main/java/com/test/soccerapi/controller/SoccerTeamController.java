@@ -59,14 +59,15 @@ public class SoccerTeamController {
     @PostMapping("/team")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Create a team with (or without) player(s)") })
     @ResponseBody
-    public ResponseEntity<Team> addTeam(@Valid @RequestBody Team team){
-        return new ResponseEntity<>(teamService.addTeam(team), HttpStatus.CREATED);
+    public ResponseEntity addTeam(@Valid @RequestBody Team team){
+        teamService.addTeam(team);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/teams")
     @ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Create multiple team with (or without) player(s)") })
     @ResponseBody
-    public ResponseEntity<List<Team>> addTeams(@Valid @RequestBody List<Team> teamList) {
+    public ResponseEntity addTeams(@Valid @RequestBody List<Team> teamList) {
         teamService.addTeams(teamList);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

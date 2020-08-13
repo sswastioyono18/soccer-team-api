@@ -24,12 +24,10 @@ public class TeamLogicImpl implements TeamLogic {
     }
 
     @Override
-    public Team addTeam(Team team) {
+    public void addTeam(Team team) {
         if (team.getId() != null) {
             team.getPlayers().stream().forEach(player -> player.setTeam(team));
+            teamRepository.save(team);
         }
-        return teamRepository.save(team);
     }
-
-
 }

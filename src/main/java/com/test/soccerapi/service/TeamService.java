@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TeamService {
     List<Team> findAllTeamsAndPlayers();
-    Team addTeam(Team team);
+    void addTeam(Team team);
     void addTeams(List<Team> teamList);
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TeamLogic {
     List<Team> findAll();
-    Team addTeam(Team team);
+    void addTeam(Team team);
 }

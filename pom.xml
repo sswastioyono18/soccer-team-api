@@ -247,19 +247,6 @@
 						</dependencies>
 						<executions>
 							<execution>
-								<id>unit-tests</id>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<skipTests>false</skipTests>
-									<includes>
-										<include>**/*Test.java</include>
-									</includes>
-								</configuration>
-							</execution>
-							<execution>
 								<id>integration-tests</id>
 								<phase>integration-test</phase>
 								<goals>

@@ -26,8 +26,8 @@ public class TeamServiceImpl implements TeamService {
 
 
     @Override
-    public Team addTeam(Team team)  {
-        return teamLogic.addTeam(team);
+    public void addTeam(Team team)  {
+         teamLogic.addTeam(team);
     }
 
     @Override
