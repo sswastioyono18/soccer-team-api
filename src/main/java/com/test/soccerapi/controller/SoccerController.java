@@ -3,6 +3,7 @@ package com.test.soccerapi.controller;
 import com.test.soccerapi.dto.SoccerTeamDataDto;
 import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.entity.Team;
+import com.test.soccerapi.repository.PlayerRepository;
 import com.test.soccerapi.service.PlayerService;
 import com.test.soccerapi.service.TeamService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,19 +24,29 @@ public class SoccerController {
     private final PlayerService playerService;
 
     @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
     public SoccerController(final TeamService teamService, PlayerService playerService) {
         this.teamService = teamService;
         this.playerService = playerService;
     }
 
-    @GetMapping("/players/{teamName}")
-    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retrieve all players within a team") })
+    @GetMapping("/players/team/{teamId}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retrieve all players based on team id") })
     @ResponseBody
-    public ResponseEntity<List<Player>> getPlayers(@PathVariable String teamName) {
-        return new ResponseEntity<>(playerService.findByTeamName(teamName), HttpStatus.OK);
+    public ResponseEntity<List<Player>> getPlayers(@PathVariable Long teamId) {
+        return new ResponseEntity<>(playerService.findByTeamId(teamId), HttpStatus.OK);
     }
 
-    @GetMapping("/players")
+    @GetMapping("/players/team/{teamName}")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retrieve all players based on team name") })
+    @ResponseBody
+    public ResponseEntity<List<Player>> getPlayersByTeamName(@PathVariable String teamName) {
+        return new ResponseEntity<>(playerRepository.findByTeam_TeamName(teamName), HttpStatus.OK);
+    }
+
+    @GetMapping("/players/team")
     @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retrieve all players") })
     @ResponseBody
     public ResponseEntity<List<Player>> getAllPlayers() {

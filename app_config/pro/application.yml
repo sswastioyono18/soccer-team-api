@@ -20,8 +20,6 @@ spring:
     username: root
     password: pass
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
     show-sql: true
     hibernate:
       naming:
