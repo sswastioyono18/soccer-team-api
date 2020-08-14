@@ -1,7 +1,10 @@
 version: '3.7'
 services:
-  soccer-api-mysql:
+  mysql-service:
     image: mysql:8.0.21
+    restart: always
+    networks:
+      - spring-boot-mysql-network
     environment:
       - MYSQL_ROOT_PASSWORD=pass
       - MYSQL_DATABASE=soccer_api
@@ -10,3 +13,31 @@ services:
       - ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 3306:3306
+  api:
+    image: sactio1811/soccer-api:1.0
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - spring-boot-mysql-network
+    depends_on:
+      - mysql-service
+    links:
+      - mysql-service
+    environment:
+      - WAIT_HOSTS=mysql-service:3306
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=10
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /wait
+        java -cp app:app/lib/* com.test.soccerapi.SoccerApiApplication
+
+networks:
+  spring-boot-mysql-network:
+    driver: bridge
