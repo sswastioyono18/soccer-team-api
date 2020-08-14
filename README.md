@@ -53,11 +53,11 @@ docker-compose up -d
 - Go to root project folder
 - Run MySQL docker (windows)
 ```
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD="pass" -e MYSQL_DATABASE="soccer_api" -e MYSQL_USER="root" -v %cd%/db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql --link mysql:mysqldb mysql:8.0.21
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD="pass" -e MYSQL_DATABASE="soccer_api" -e MYSQL_USER="root" -v %cd%/db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql mysql:8.0.21
 ```
 - or Mac OSX
 ```
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD="pass" -e MYSQL_DATABASE="soccer_api" -e MYSQL_USER="root" -v ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql --link mysql:mysqldb mysql:8.0.21
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD="pass" -e MYSQL_DATABASE="soccer_api" -e MYSQL_USER="root" -v ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql mysql:8.0.21
 ```
 
 - Then run maven command
@@ -65,6 +65,12 @@ docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD="pass" -e MYSQL_D
 ```
 mvn clean install
 mvn spring-boot:run
+```
+
+Dont forget to destroy the container after you finished (or if you want to re-run again from scratch)
+```
+docker stop mysql
+docker rm mysql
 ```
 
 ## 🔧 Running the tests <a name = "tests"></a>

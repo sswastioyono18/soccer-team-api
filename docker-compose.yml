@@ -14,7 +14,7 @@ services:
     ports:
       - 3306:3306
   api:
-    image: sactio1811/soccer-api:1.0
+    image: sactio1811/soccer-team-api:1.0
     build:
       context: ./
       dockerfile: Dockerfile

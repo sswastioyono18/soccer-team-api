@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.test</groupId>
-	<artifactId>soccer-api</artifactId>
+	<artifactId>soccer-team-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>soccer-api</name>
-	<description>Soccer API</description>
+	<name>soccer-team-api</name>
+	<description>Soccer Team API</description>
 
 	<properties>
 		<java.version>1.8</java.version>
