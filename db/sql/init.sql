@@ -17,4 +17,4 @@ CREATE TABLE `player` (
 );
 
 ALTER TABLE player
-ADD CONSTRAINT unique_player_no UNIQUE (player_no, team_id);
+ADD CONSTRAINT uq#player_no_team_id UNIQUE (player_no, team_id);

@@ -4,11 +4,14 @@ import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.logic.PlayerLogic;
 import com.test.soccerapi.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames={"teamName"})
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerLogic playerLogic;
@@ -19,6 +22,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    @Cacheable
     public List<Player> findByTeamName(String teamName) {
         return playerLogic.findByTeamName(teamName);
     }
@@ -27,4 +31,5 @@ public class PlayerServiceImpl implements PlayerService {
     public List<Player> findAll() {
         return playerLogic.findAll();
     }
+
 }
