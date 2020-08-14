@@ -11,7 +11,7 @@ RUN chmod +x ./mvnw
 RUN ./mvnw dependency:go-offline -B
 
 COPY src src
-COPY app_config app_config
+COPY app_config/docker/application.yml src/main/resources/application.yml
 
 RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
