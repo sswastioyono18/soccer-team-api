@@ -1,7 +1,7 @@
 package com.test.soccerapi.service.impl;
 
 import com.test.soccerapi.entity.Team;
-import com.test.soccerapi.logic.TeamLogic;
+import com.test.soccerapi.repository.TeamRepository;
 import com.test.soccerapi.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,29 +11,36 @@ import java.util.List;
 @Service
 public class TeamServiceImpl implements TeamService {
 
-    private final TeamLogic teamLogic;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public TeamServiceImpl(TeamLogic teamLogic) {
-        this.teamLogic = teamLogic;
+    public TeamServiceImpl(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
     }
 
 
     @Override
     public List<Team> findAllTeamsAndPlayers() {
-        return teamLogic.findAll();
+        return teamRepository.findAll();
     }
 
 
     @Override
     public void addTeam(Team team)  {
-         teamLogic.addTeam(team);
+        assignTeamAndSave(team);
     }
 
     @Override
     public void addTeams(List<Team> teamList) {
         for(Team team: teamList){
-            teamLogic.addTeam(team);
+            assignTeamAndSave(team);
+        }
+    }
+
+    private void assignTeamAndSave(Team team){
+        if (team.getId() != null) {
+            team.getPlayers().forEach(player -> player.setTeam(team));
+            teamRepository.save(team);
         }
     }
 }

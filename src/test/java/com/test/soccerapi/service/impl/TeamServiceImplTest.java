@@ -1,4 +1,4 @@
-package com.test.soccerapi.logic.impl;
+package com.test.soccerapi.service.impl;
 
 import com.test.soccerapi.entity.Player;
 import com.test.soccerapi.entity.Team;
@@ -15,11 +15,11 @@ import java.util.Arrays;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-public class TeamLogicImplTest {
+public class TeamServiceImplTest {
     @Mock
     TeamRepository teamRepository;
     @InjectMocks
-    TeamLogicImpl teamLogicImpl;
+    TeamServiceImpl teamServiceImpl;
 
     @Before
     public void setUp() {
@@ -32,7 +32,7 @@ public class TeamLogicImplTest {
         Team team = new Team();
         team.setId(null);
         team.setTeamName("Test Team Name");
-        teamLogicImpl.addTeam(team);
+        teamServiceImpl.addTeam(team);
         verify(teamRepository, never()).save(team);
     }
 
@@ -47,7 +47,7 @@ public class TeamLogicImplTest {
         team.setId(123L);
         team.setTeamName("Test Team Name");
         team.setPlayers(Arrays.asList(player));
-        teamLogicImpl.addTeam(team);
+        teamServiceImpl.addTeam(team);
         verify(teamRepository, Mockito.times(1)).save(team);
     }
 }
