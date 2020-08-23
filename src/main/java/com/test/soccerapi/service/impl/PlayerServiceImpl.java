@@ -1,7 +1,7 @@
 package com.test.soccerapi.service.impl;
 
 import com.test.soccerapi.entity.Player;
-import com.test.soccerapi.logic.PlayerLogic;
+import com.test.soccerapi.repository.PlayerRepository;
 import com.test.soccerapi.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -14,22 +14,23 @@ import java.util.List;
 @CacheConfig(cacheNames={"teamName"})
 public class PlayerServiceImpl implements PlayerService {
 
-    private final PlayerLogic playerLogic;
+    private final PlayerRepository playerRepository;
 
     @Autowired
-    public PlayerServiceImpl(PlayerLogic playerLogic) {
-        this.playerLogic = playerLogic;
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     @Override
     @Cacheable
     public List<Player> findByTeamName(String teamName) {
-        return playerLogic.findByTeamName(teamName);
+        return playerRepository.findByTeam_TeamName(teamName);
     }
+
 
     @Override
     public List<Player> findAll() {
-        return playerLogic.findAll();
+        return playerRepository.findAll();
     }
 
 }
